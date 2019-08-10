@@ -1,0 +1,65 @@
+####### П.1 #######
+ubuntu@ip-172-31-43-60:~$ cat .my.cnf
+[client]
+user=demkonst
+password=zRylS...
+
+
+####### П.2 #######
+mysql> CREATE DATABASE example;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| example            |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use example;
+Database changed
+mysql> CREATE TABLE users(id INT, name VARCHAR(25));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_example |
++-------------------+
+| users             |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> exit
+Bye
+ubuntu@ip-172-31-43-60:~$ mysqldump example > example_dump.sql
+ubuntu@ip-172-31-43-60:~$ ls
+example_dump.sql
+ubuntu@ip-172-31-43-60:~$
+
+
+####### П.3 #######
+mysql> CREATE DATABASE sample;
+Query OK, 1 row affected (0.00 sec)
+mysql> exit
+Bye
+ubuntu@ip-172-31-43-60:~$ mysql sample < example_dump.sql
+ubuntu@ip-172-31-43-60:~$ mysql
+mysql> USE sample;
+Database changed
+mysql> SHOW tables;
++------------------+
+| Tables_in_sample |
++------------------+
+| users            |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> exit
+Bye
+ubuntu@ip-172-31-43-60:~$
